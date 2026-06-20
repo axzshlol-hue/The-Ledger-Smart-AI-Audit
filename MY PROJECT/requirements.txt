@@ -1,0 +1,5 @@
+streamlit
+ollama
+speechrecognition
+pyttsx3
+psyqlite3

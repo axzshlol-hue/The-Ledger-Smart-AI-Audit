@@ -1,0 +1,15 @@
+[theme]
+# Primary color for buttons, interactive widgets, and active elements
+primaryColor = "#F58F7C"
+
+# Main background color for the app
+backgroundColor = "#2C2B30"
+
+# Secondary background for sidebar, input fields, and tables
+secondaryBackgroundColor = "#4F4F51"
+
+# Main text color
+textColor = "#D6D6D6"
+
+# Using a clean sans-serif font
+font = "sans serif"
