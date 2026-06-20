@@ -45,7 +45,7 @@ As required by the **Evaluation Rule**, this project is built for transparency:
 ---
 
 ## 🛠 Installation & Deployment
-1. **Clone**: `git clone [your-repository-url]`
+1. **Clone**: `git clone [https://github.com/axzshlol-hue/The-Ledger-Smart-AI-Audit.git]`
 2. **Install**: `pip install -r requirements.txt`
 3. **Run**: `streamlit run app.py`
 
