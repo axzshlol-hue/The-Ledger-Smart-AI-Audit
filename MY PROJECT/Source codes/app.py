@@ -3,6 +3,7 @@ import sqlite3
 import speech_recognition as sr
 import pyttsx3
 import os
+import pandas as pd
 from agent import audit_submission
 
 # --- CUSTOM AUTHENTICATION ---
@@ -34,6 +35,12 @@ def read_aloud(text):
 if not os.path.exists("submissions_vault"):
     os.makedirs("submissions_vault")
 
+# Initialize session state for manual grading
+if 'main_df' not in st.session_state:
+    st.session_state.main_df = None
+if 'bonus_df' not in st.session_state:
+    st.session_state.bonus_df = None
+
 role = st.sidebar.selectbox("Login as", ["Student", "Admin"])
 
 if role == "Student":
@@ -59,15 +66,45 @@ elif role == "Admin":
         students = [d for d in os.listdir("submissions_vault") if os.path.isdir(os.path.join("submissions_vault", d))]
         selected = st.selectbox("Select Student to Audit", students)
         
-        if st.button("Query Ledger Data"):
-            st.write(query_ledger("Show me recent transactions"))
-            
         if st.button("Run Audit"):
             with st.spinner('Auditing in progress...'):
                 report = audit_submission(selected)
                 st.session_state.last_report = report
+                
+                # Full Main Criteria DataFrame
+                st.session_state.main_df = pd.DataFrame({
+                    "Criteria": ["Working Solution", "Creativity/Originality", "AI Usage", "User Interface", "GitHub Repo Quality", "Development Log", "Demo Video"],
+                    "Status": ["✅"] * 7, 
+                    "Marks": [25, 20, 15, 10, 10, 10, 10]
+                })
+                # Full Bonus Criteria DataFrame
+                st.session_state.bonus_df = pd.DataFrame({
+                    "Criteria": ["Local LLM", "Ollama", "RAG", "Agentic Workflows", "Voice I/O", "Auth", "Database"],
+                    "Status": ["+"] * 7,
+                    "Marks": [5, 5, 5, 5, 5, 5, 5]
+                })
+        
+        if st.button("Query Ledger Data"):
+            st.write(query_ledger("Show me recent transactions"))
             
-        if "last_report" in st.session_state:
+        if st.session_state.get('main_df') is not None:
+            st.subheader("Manual Grading Override")
+            
+            # Edit Main Criteria
+            st.write("**Main Criteria**")
+            edited_main = st.data_editor(st.session_state.main_df, key="main_editor", use_container_width=True)
+            
+            # Edit Bonus Criteria
+            st.write("**Bonus Criteria**")
+            edited_bonus = st.data_editor(st.session_state.bonus_df, key="bonus_editor", use_container_width=True)
+            
+            if st.button("Save All Overrides"):
+                st.session_state.main_df = edited_main
+                st.session_state.bonus_df = edited_bonus
+                st.success("All marks and statuses updated!")
+            
+            st.markdown("---")
+            st.subheader("AI Report Summary")
             st.markdown(st.session_state.last_report)
             
         if st.button("🔊 Read Summary Aloud"):
