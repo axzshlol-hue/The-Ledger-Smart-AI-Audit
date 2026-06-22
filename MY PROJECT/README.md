@@ -8,10 +8,11 @@ The Ledger is an intelligent, agentic auditing platform designed for automated c
  * **Voice-First Interaction:** Integrated pyttsx3 for hands-free administrative reporting and feedback delivery.
  * **Admin Security:** Robust session-state authentication to protect the sensitive auditing panels.
  * **Local-First Processing:** Entire RAG and LLM workflow runs locally, ensuring zero latency, data privacy, and offline capability.
-## 🏗️ Workflow Diagram
+### 🏗️ Workflow Diagram
+
 ```mermaid
 graph TD
-    A[Student Repo (.zip)] --> B{Extraction}
+    A[Student Repo .zip] --> B{Extraction}
     B --> C[Source Code Files]
     D[Rubric: .txt or Image] --> E[Agentic Auditor]
     C --> E
