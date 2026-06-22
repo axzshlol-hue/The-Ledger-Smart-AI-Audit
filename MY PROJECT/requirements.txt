@@ -2,5 +2,5 @@ streamlit
 ollama
 speechrecognition
 pyttsx3
-psyqlite
+psyqlite3
 pandas
