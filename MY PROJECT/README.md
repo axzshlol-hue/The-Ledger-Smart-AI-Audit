@@ -41,7 +41,7 @@ graph TD
  * **Challenges Faced:** Resolved local socket binding conflicts and Streamlit session state volatility during the audit process.
  * **Future Improvements:** Planned migration to multi-agent swarm architecture for deeper, repository-wide static analysis.
 ## 🎥 Project Demo
-▶️ **Watch the Live Demo Here**
+▶️ **Video Link:**
 ## 🛠 Installation & Deployment
  1. **Clone:** git clone https://github.com/axzshlol-hue/The-Ledger-Smart-AI-Audit.git
  2. **Install:** pip install streamlit pandas pyttsx3 ollama
